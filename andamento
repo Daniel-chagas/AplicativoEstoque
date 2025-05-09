@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Definição das estruturas
+typedef struct Produto {
+    int codigo;
+    char nome[50];
+    float preco;
+    int quantidade;
+    int estoque_minimo;
+} Produto;
+
+typedef struct Node {
+    Produto item;
+    struct Node* proximo;
+} Node;
+
+// Funções
+void adicionarProduto(Node** head, Produto p) {
+    Node* novoNode = (Node*) malloc(sizeof(Node));
+    if (novoNode == NULL) {
+        perror("Erro ao alocar memória para novo produto");
+        exit(EXIT_FAILURE);
+    }
+    novoNode->item = p;
+    novoNode->proximo = *head;
+    *head = novoNode;
+    printf("Produto '%s' (código %d) adicionado ao estoque.\n", p.nome, p.codigo);
+}
+
+Produto* buscarProduto(Node* head, int codigo) {
+    Node* atual = head;
+    while (atual != NULL) {
+        if (atual->item.codigo == codigo) {
+            return &(atual->item);
+        }
+        atual = atual->proximo;
+    }
+    return NULL;
+}
+
+void gerarRelatorioABC(Node* head) {
+    printf("Função gerarRelatorioABC ainda não implementada.\n");
+}
+
+int main() {
+    Node* listaEstoque = NULL;
+
+    Produto produto1 = {1001, "Caneta", 1.99, 50, 10};
+    Produto produto2 = {1002, "Lápis", 0.75, 100, 25};
+    Produto produto3 = {1003, "Borracha", 0.50, 80, 20};
+
+    // Adicionando os produtos
+    adicionarProduto(&listaEstoque, produto1);
+    adicionarProduto(&listaEstoque, produto2);
+    adicionarProduto(&listaEstoque, produto3);
+
+    // Buscando um produto
+    int codigoBusca = 1002;
+    Produto* produtoEncontrado = buscarProduto(listaEstoque, codigoBusca);
+    if (produtoEncontrado != NULL) {
+        printf("\nProduto com código %d encontrado:\n", codigoBusca);
+        printf("  Nome: %s\n", produtoEncontrado->nome);
+        printf("  Preço: %.2f\n", produtoEncontrado->preco);
+        printf("  Quantidade: %d\n", produtoEncontrado->quantidade);
+        printf("  Estoque Mínimo: %d\n", produtoEncontrado->estoque_minimo);
+    } else {
+        printf("\nProduto com código %d não encontrado.\n", codigoBusca);
+    }
+
+    // Gerando o relatório ABC
+    gerarRelatorioABC(listaEstoque);
+
+    return 0;
+}
+
