@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <locale.h>
 
-// DefiniÁıes de Estruturas 
+// Defini√ß√µes de Estruturas 
 typedef struct Produto {
     int codigo;
     char nome[50];
@@ -23,7 +23,7 @@ typedef struct ListaEstoque {
     int tamanho;
 } ListaEstoque;
 
-// FunÁıes da Lista 
+// Fun√ß√µes da Lista 
 void inicializarLista(ListaEstoque* lista) {
     lista->inicio = NULL;
     lista->tamanho = 0;
@@ -40,7 +40,7 @@ bool produtoExiste(ListaEstoque* lista, int codigo) {
 
 void adicionarProduto(ListaEstoque* lista, Produto novoProduto) {
     if (produtoExiste(lista, novoProduto.codigo)) {
-        printf("Erro: CÛdigo %d j· existe!\n", novoProduto.codigo);
+        printf("Erro: C√≥digo %d j√° existe!\n", novoProduto.codigo);
         return;
     }
 
@@ -69,7 +69,7 @@ Produto* buscarProduto(ListaEstoque* lista, int codigo) {
     return NULL;
 }
 
-// OrdenaÁ„o Bubble Sort 
+// Ordena√ß√£o Bubble Sort 
 void ordenarPorValorTotal(ListaEstoque* lista) {
     if (lista->tamanho < 2) return;
 
@@ -95,7 +95,7 @@ void ordenarPorValorTotal(ListaEstoque* lista) {
     } while (trocou);
 }
 
-// RelatÛrio ABC 
+// Relat√≥rio ABC 
 void gerarRelatorioABC(ListaEstoque* lista) {
     ordenarPorValorTotal(lista);
 
@@ -109,17 +109,17 @@ void gerarRelatorioABC(ListaEstoque* lista) {
     }
 }
 
-// ---------------------------- Interface ----------------------------
+// Interface 
 void exibirDadosProduto(const Produto* produto) {
     if (produto == NULL) return;
-    printf("\nCÛdigo: %d\n", produto->codigo);
+    printf("\nC√≥digo: %d\n", produto->codigo);
     printf("Nome: %s\n", produto->nome);
-    printf("PreÁo: R$ %.2f\n", produto->preco);
+    printf("Pre√ßo: R$ %.2f\n", produto->preco);
     printf("Quantidade: %d\n", produto->quantidade);
-    printf("Estoque MÌnimo: %d\n", produto->estoque_minimo);
+    printf("Estoque M√≠nimo: %d\n", produto->estoque_minimo);
 }
 
-// ---------------------------- Main ----------------------------
+// Main 
 int main() {
     ListaEstoque estoque;
     inicializarLista(&estoque);
@@ -142,10 +142,10 @@ int main() {
         printf("\nProduto encontrado:");
         exibirDadosProduto(encontrado);
     } else {
-        printf("\nProduto %d n„o encontrado.\n", codigoBusca);
+        printf("\nProduto %d n√£o encontrado.\n", codigoBusca);
     }
 
-    // RelatÛrio 
+    // Relat√≥rio 
     gerarRelatorioABC(&estoque);
 
     
